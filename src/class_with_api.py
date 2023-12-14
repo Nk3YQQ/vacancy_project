@@ -1,7 +1,7 @@
 import json
 import os
 from abc import ABC, abstractmethod
-from typing import Any, Dict, Union
+from typing import Any
 
 import requests
 from dotenv import load_dotenv
