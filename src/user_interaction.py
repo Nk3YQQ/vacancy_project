@@ -22,6 +22,9 @@ def user_interaction() -> Any:
 
         vacancy_input = input("Название вакансии: ")
 
+        if not vacancy_input:
+            return "Вы ничего не ввели :("
+
         hh_api.get_vacancies(vacancy_input)
         superjob_api.get_vacancies(vacancy_input)
 
@@ -66,12 +69,18 @@ def user_interaction() -> Any:
         csv_saver = CSVSaver()
 
         if format_to_save_input == "json":
-            json_saver.add_vacancy(top)
-            print("Данные успешно добавлены в файл!")
+            if json_saver.add_vacancy(top) == "Error! Vacancy in vacancies":
+                return "Вакансия уже добавлена в избранное."
+            else:
+                json_saver.add_vacancy(top)
+                print("Данные успешно добавлены в файл!")
 
         elif format_to_save_input == "csv":
-            csv_saver.add_vacancy(top)
-            print("Данные успешно добавлены в файл!")
+            if csv_saver.add_vacancy(top) == "Error! Vacancy in vacancies":
+                return "Вакансия уже добавлена в избранное."
+            else:
+                csv_saver.add_vacancy(top)
+                print("Данные успешно добавлены в файл!")
 
         else:
             return "Вы ввели формат, который не поддерживается для сохранения данных."
