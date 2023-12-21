@@ -6,7 +6,7 @@ from src.class_with_vacancy import Vacancy
 
 class ConvertVacancy:
     """
-    Класс конвертирует данные из формиата json в объект класса Vacancy и наоборот
+    Класс конвертирует данные из формата json в объект класса Vacancy и наоборот
     """
 
     @staticmethod
