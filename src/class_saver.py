@@ -3,7 +3,7 @@ from abc import ABC, abstractmethod
 from typing import Any
 
 from config import CSV_SAVER_PATH, JSON_SAVER_PATH
-from src.funcs_for_save import open_csv_file, open_json_file, write_to_csv_file, write_to_json_file
+from src.funcs_for_save import is_vacancy_in_file, open_csv_file, open_json_file, write_to_csv_file, write_to_json_file
 from src.utils import delete_vacancy
 
 
@@ -30,9 +30,11 @@ class JSONSaver(Saver):
     Класс сохраняет файлы в формат json
     """
 
-    def add_vacancy(self, vacancy: Any) -> None:
+    def add_vacancy(self, vacancy: Any) -> Any:
         format_vacancy = json.loads(vacancy)
         vacancies = open_json_file(JSON_SAVER_PATH)
+        if is_vacancy_in_file(format_vacancy, vacancies):
+            return "Error! Vacancy in vacancies"
         vacancies.append(format_vacancy)
         write_to_json_file(JSON_SAVER_PATH, vacancies)
 
@@ -54,9 +56,11 @@ class CSVSaver(Saver):
     Класс сохраняет файлы в формат csv
     """
 
-    def add_vacancy(self, vacancy: Any) -> None:
+    def add_vacancy(self, vacancy: Any) -> Any:
         format_vacancy = json.loads(vacancy)
         vacancies = open_csv_file(CSV_SAVER_PATH)
+        if is_vacancy_in_file(format_vacancy, vacancies):
+            return "Error! Vacancy in vacancies"
         vacancies.append(format_vacancy)
         write_to_csv_file(CSV_SAVER_PATH, vacancies)
 
