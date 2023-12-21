@@ -9,7 +9,6 @@ readme = "README.md"
 python = "^3.11"
 python-dotenv = "^1.0.0"
 requests = "^2.31.0"
-pandas = "^2.1.4"
 types-requests = "^2.31.0.10"
 
 
