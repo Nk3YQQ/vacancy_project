@@ -12,7 +12,6 @@ from src.utils import convert_vacancies_to_list
 
 load_dotenv()
 
-
 SUPERJOB_API = os.getenv("SUPERJOB_API")
 
 
