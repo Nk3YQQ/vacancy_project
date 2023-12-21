@@ -112,7 +112,7 @@ def view_all_user_vacancy() -> str:
     return json.dumps(all_vacancies, ensure_ascii=False, indent=4)
 
 
-def delete_vacancy(vacancies: dict, index: str) -> dict | str:
+def delete_vacancy(vacancies: list, index: str) -> list | str:
     """
     Функция удаляет вакансию из json/csv файла
     """
