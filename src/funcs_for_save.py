@@ -5,6 +5,9 @@ from typing import Any
 
 
 def open_json_file(filepath: Path) -> Any:
+    """
+    Функция открывает файл формата json и получает от туда данные
+    """
     try:
         with open(filepath, "r", encoding="utf-8") as file:
             return json.load(file)
@@ -14,11 +17,17 @@ def open_json_file(filepath: Path) -> Any:
 
 
 def write_to_json_file(filepath: Path, data: Any) -> Any:
+    """
+    Функция записывает данные в файл формата json
+    """
     with open(filepath, "w", encoding="utf-8") as file:
         json.dump(data, file, ensure_ascii=False, indent=4)
 
 
 def open_csv_file(filepath: Path) -> Any:
+    """
+    Функция открывает файл формата csv и получает от туда данные
+    """
     try:
         with open(filepath, "r", encoding="utf-8") as file:
             return list(csv.DictReader(file))
@@ -28,6 +37,9 @@ def open_csv_file(filepath: Path) -> Any:
 
 
 def write_to_csv_file(filepath: Path, data: Any) -> Any:
+    """
+    Функция записывает данные в файл формата json
+    """
     with open(filepath, "w", encoding="utf-8") as file:
         fieldnames = ["vacancy", "url", "salary", "description"]
         writer = csv.DictWriter(file, fieldnames=fieldnames)
