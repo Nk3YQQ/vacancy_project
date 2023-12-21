@@ -3,15 +3,17 @@ import os
 from abc import ABC, abstractmethod
 from typing import Any
 
-from config import JSON_PATH
-from src.funcs_for_save import write_to_json_file, open_json_file
-
 import requests
 from dotenv import load_dotenv
 
+from config import JSON_PATH
+from src.funcs_for_save import open_json_file, write_to_json_file
 from src.utils import convert_vacancies_to_list
 
 load_dotenv()
+
+
+SUPERJOB_API = os.getenv("SUPERJOB_API")
 
 
 class SearchVacancy(ABC):
@@ -53,10 +55,12 @@ class SuperJobAPI(SearchVacancy):
         """
         Метод принимает информацию из API SuperJob и преобразует в список словарей для сохранения в json-файл
         """
+        if not SUPERJOB_API:
+            return "Упс, случилась неожиданная проблема с получением вакансий. Разработчики уже решают проблему"
         if not isinstance(text, str):
             return "Неверный ввод! Текст должен быть в виде строки."
         url = f"https://api.superjob.ru/2.0/vacancies/?keywords={text}&count=100"
-        response = requests.get(url, headers={"X-Api-App-Id": os.getenv("SUPERJOB_API")})
+        response = requests.get(url, headers={"X-Api-App-Id": SUPERJOB_API})
         vacancies = json.loads(response.content)
         headhunter_vacancies = open_json_file(JSON_PATH)
         superjob_vacancies = convert_vacancies_to_list(vacancies)
