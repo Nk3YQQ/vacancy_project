@@ -20,6 +20,9 @@ def make_salary(salary: dict) -> int:
 
 
 def make_description(snippet: dict) -> str:
+    """
+    Функция преобразует блок "Описание", полученного из API HeadHunter
+    """
     if not snippet:
         return "Нет данных."
     if not snippet["requirement"]:
